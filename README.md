@@ -1,6 +1,6 @@
 # Alx School - AirBnB_clone
 
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231009%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231009T085123Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=5817bf77b89ce6a809b9001f92199a7d498f8d2a3cf410cb6eadb94c36868437)
+![Air_BnB_clone logo](images/air_bnb_clone.png)
 
 ## Description
 This team project is part of the Holberton School Full-Stack Software Engineer program. It's the first step towards building a first full web application: an AirBnB clone. This first step consists of a custom command interpreter program built using the python module cmd. Contains to create, update, delete and print a class instance or all instaces created.
