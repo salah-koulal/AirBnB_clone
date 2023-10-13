@@ -7,6 +7,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    def classes(self):
+        """Returns a dictionary of valid classes and their references."""
+        from models.base_model import BaseModel
+
+        classes = {"BaseModel": BaseModel}
+        return classes
+
     def all(self):
         """Returns the dictionary __objects"""
         return FileStorage.__objects
