@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-
+"""Defines a class FileStorage."""
 import json
 
 
 class FileStorage:
-    """Class for serializtion and deserialization of base classes."""
+    """Class that serializes instances to a JSON
+    file and deserializes JSON file to instances."""
     __file_path = "file.json"
     __objects = {}
 

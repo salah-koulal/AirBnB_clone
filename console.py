@@ -1,13 +1,28 @@
 #!/usr/bin/python3
+"""Contains the entry point of the command interpreter.
 
+You must use the module cmd.
+Your class definition must be: class HBNBCommand(cmd.Cmd):
+Your command interpreter should implement:
+quit and EOF to exit the program,
+help (this action is provided by default by cmd but you should keep it
+updated and documented as you work through tasks),
+a custom prompt: (hbnb),
+an empty line + ENTER shouldn’t execute anything.
+Your code should not be executed when imported
+"""
 import cmd
 from models import storage
-from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
-    """Class for command interpreter"""
+    """class for command processor.
+
+    Args:
+        cmd (_type_): _description_
+    """
     prompt = '(hbnb) '
-    
+
     def do_quit(self, line):
         """Quit command to exit the program
         """
@@ -42,6 +57,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split(' ')
+            print(args)
             if args[0] not in storage.classes():
                 print("** class doesn't exist **")
             elif len(args) < 2:
@@ -73,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all 
+        """Prints all string representation of all
         instances based or not on the class name"""
         args = arg.split()
         if not args:
@@ -83,7 +99,8 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in storage.classes():
                 print("** class doesn't exist **")
                 return
-            all_instances = [value for key, value in storage.all().items() if key.startswith(class_name)]
+            all_instances = [value for key, value in storage.all().items()
+                             if key.startswith(class_name)]
         print([str(all_instance) for all_instance in all_instances])
 
     def do_update(self, arg):
@@ -129,7 +146,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in storage.classes():
             print("** class doesn't exist **")
         else:
-            matches = [key for key in storage.all() if key.startswith(args[0] + '.')]
+            matches = [key for key in storage.all()
+                       if key.startswith(args[0] + '.')]
             print(len(matches))
 
     def do_User(self, arg):
@@ -140,17 +158,19 @@ class HBNBCommand(cmd.Cmd):
         """Helper method to handle actions for specific classes"""
         args = arg.split('.')
         command = cls_name + arg
+
         if len(args) == 2 and args[1] == "all()":
-            # class_all = storage.classes()[cls_name]()
             if cls_name in storage.classes():
                 self.do_all(cls_name)
-                # print(class_all)
         elif len(args) == 2 and args[1] == "count()":
             if cls_name in storage.classes():
                 self.do_count(cls_name)
+        elif len(args) == 2 and args[1] == "show()":
+            if cls_name in storage.classes():
+                self.do_show()
         else:
-            super()._handle_class_actions(command)
+            super().default(command)
 
-    
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
