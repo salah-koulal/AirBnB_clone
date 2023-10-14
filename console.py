@@ -2,6 +2,7 @@
 
 import cmd
 from models import storage
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """Class for command interpreter"""
@@ -118,6 +119,21 @@ class HBNBCommand(cmd.Cmd):
         # Update the attribute with proper casting
         setattr(instance, attr_name, attr_value)
         instance.save()
+
+    def do_User(self, arg):
+        """Handle actions for the State class"""
+        self._handle_class_actions("User", arg)
+
+    def _handle_class_actions(self, cls_name, arg):
+        """Helper method to handle actions for specific classes"""
+        args = arg.split('.')
+        command = cls_name + arg
+        if len(args) == 2 and args[1] == "all()":
+            class_all = storage.classes()[cls_name]()
+            if cls_name in storage.classes():
+                print(class_all)
+        else:
+            super()._handle_class_actions(command)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
