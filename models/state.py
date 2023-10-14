@@ -7,4 +7,3 @@ class State(BaseModel):
     """Class for creating state object which inherits
     `BaseModel` properties"""
     name = ""
-

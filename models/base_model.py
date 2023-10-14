@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-
 import uuid
 import datetime as dt
 from models import storage
 
+
 class BaseModel:
+    """
+    The BaseModel class defines common attributes/methods for other classes.
+    """
     def __init__(self, *args, **kwargs):
         if kwargs:
             for key, value in kwargs.items():

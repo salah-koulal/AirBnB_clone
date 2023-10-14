@@ -2,6 +2,7 @@
 
 import json
 
+
 class FileStorage:
     """Class for serializtion and deserialization of base classes."""
     __file_path = "file.json"
@@ -17,13 +18,15 @@ class FileStorage:
         from models.amenity import Amenity
         from models.review import Review
 
-        classes = {"BaseModel": BaseModel,
-                   "User": User,
-                   "Place": Place,
-                   "State": State,
-                   "City": City,
-                   "Amenity": Amenity,
-                   "Review": Review}
+        classes = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Review": Review
+        }
         return classes
 
     def all(self):
@@ -51,7 +54,6 @@ class FileStorage:
                 dict_objs = json.load(file)
                 for key in dict_objs:
                     if key.split(".")[0] == 'BaseModel':
-                        __class__.__objects[key] = BaseModel(**dict_objs[key]) 
-                                                    
+                        __class__.__objects[key] = BaseModel(**dict_objs[key])
         except FileNotFoundError:
             pass
