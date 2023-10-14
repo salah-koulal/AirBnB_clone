@@ -120,20 +120,37 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attr_name, attr_value)
         instance.save()
 
+    def do_count(self, arg):
+        """Counts the instances of a class.
+        """
+        args = arg.split(' ')
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            matches = [key for key in storage.all() if key.startswith(args[0] + '.')]
+            print(len(matches))
+
     def do_User(self, arg):
         """Handle actions for the State class"""
-        self._handle_class_actions("User", arg)
+        self.default("User", arg)
 
-    def _handle_class_actions(self, cls_name, arg):
+    def default(self, cls_name, arg):
         """Helper method to handle actions for specific classes"""
         args = arg.split('.')
         command = cls_name + arg
         if len(args) == 2 and args[1] == "all()":
-            class_all = storage.classes()[cls_name]()
+            # class_all = storage.classes()[cls_name]()
             if cls_name in storage.classes():
-                print(class_all)
+                self.do_all(cls_name)
+                # print(class_all)
+        elif len(args) == 2 and args[1] == "count()":
+            if cls_name in storage.classes():
+                self.do_count(cls_name)
         else:
             super()._handle_class_actions(command)
 
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
