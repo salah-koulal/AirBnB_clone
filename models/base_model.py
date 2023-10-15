@@ -38,12 +38,12 @@ class BaseModel:
             str: class details
         """
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+            str(self.__class__.__name__), str(self.id), str(self.__dict__))
 
     def save(self):
         """Call save() method of storage"""
+        self.updated_at = dt.datetime.now()
         storage.save()
-        return self.updated_at
 
     def to_dict(self):
         """Returns a dictionary containing all key/values of __dict__ of
