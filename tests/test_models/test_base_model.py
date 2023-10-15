@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 
 class TestBaseModel(unittest.TestCase):
-    """Tests for the base class"""
+    """Tests for the BaseModel class"""
 
     def test_init(self):
         """Test if id, created_at, and updated_at exists and their types.
@@ -93,6 +93,7 @@ class TestBaseModel(unittest.TestCase):
 
         # Define a tolerance for timestamp comparison (e.g., 1 second)
         timestamp_tolerance = timedelta(seconds=1)
+
 
 if __name__ == '__main__':
     unittest.main()
