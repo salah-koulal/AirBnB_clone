@@ -9,6 +9,7 @@ class State(BaseModel):
     Attributes:
         name (string): name of state.
     """
+
     name = ""
 
     def __init__(self, *args, **kwargs):

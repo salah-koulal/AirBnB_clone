@@ -21,6 +21,7 @@ class HBNBCommand(cmd.Cmd):
     Args:
         cmd (_type_): _description_
     """
+
     prompt = '(hbnb) '
 
     def do_quit(self, line):

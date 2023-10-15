@@ -9,6 +9,7 @@ class Amenity(BaseModel):
     Attributes:
         name (string): name of amenity.
     """
+
     name = ""
 
     def __init__(self, *args, **kwargs):
