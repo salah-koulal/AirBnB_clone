@@ -17,14 +17,8 @@ class BaseModel:
                     if key in ('created_at', 'updated_at'):
                         value = dt.datetime.strptime(
                             value, '%Y-%m-%dT%H:%M:%S.%f')
-                    setattr(self, key, value)
-
-            if 'id' not in kwargs:
-                self.id = str(uuid.uuid4())
-            if 'created_at' not in kwargs:
-                self.created_at = dt.datetime.now()
-            if 'updated_at' not in kwargs:
-                self.updated_at = dt.datetime.now()
+                    else:
+                        setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = dt.datetime.now()
@@ -38,7 +32,7 @@ class BaseModel:
             str: class details
         """
         return "[{}] ({}) {}".format(
-            str(self.__class__.__name__), str(self.id), str(self.__dict__))
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """Call save() method of storage"""
