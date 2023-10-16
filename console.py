@@ -140,19 +140,18 @@ class HBNBCommand(cmd.Cmd):
         instance.save()
 
     def do_count(self, arg):
-            """Counts the instances of a class.
-            """
-            args = arg.split(' ')
-            count = 0
-            if not args[0]:
-                print("** class name missing **")
-            elif args[0] not in storage.classes():
-                print("** class doesn't exist **")
-            else:
-                for obj in storage.all().values():
-                    if args[0] == obj.__class__.__name__:
-                        count+=1 
-                print(count)
+        """Counts the instances of a class."""
+        args = arg.split(' ')
+        count = 0
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            for obj in storage.all().values():
+                if args[0] == obj.__class__.__name__:
+                    count += 1
+            print(count)
 
     def do_User(self, arg):
         """Handle actions for the State class"""
