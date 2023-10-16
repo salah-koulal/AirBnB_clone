@@ -12,6 +12,8 @@ an empty line + ENTER shouldn’t execute anything.
 Your code should not be executed when imported
 """
 import cmd
+import sys
+import shlex
 from models import storage
 
 
@@ -58,7 +60,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split(' ')
-            print(args)
             if args[0] not in storage.classes():
                 print("** class doesn't exist **")
             elif len(args) < 2:
@@ -138,19 +139,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attr_name, attr_value)
         instance.save()
 
-    def do_count(self, arg):
-        """Counts the instances of a class.
-        """
-        args = arg.split(' ')
-        if not args[0]:
-            print("** class name missing **")
-        elif args[0] not in storage.classes():
-            print("** class doesn't exist **")
-        else:
-            matches = [key for key in storage.all()
-                       if key.startswith(args[0] + '.')]
-            print(len(matches))
-
     def do_User(self, arg):
         """Handle actions for the State class"""
         self.default("User", arg)
@@ -166,9 +154,6 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 2 and args[1] == "count()":
             if cls_name in storage.classes():
                 self.do_count(cls_name)
-        elif len(args) == 2 and args[1] == "show()":
-            if cls_name in storage.classes():
-                self.do_show()
         else:
             super().default(command)
 
