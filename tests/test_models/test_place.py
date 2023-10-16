@@ -4,12 +4,21 @@ Unit tests for <file>
 Run with: python -m unittest test_module
 """
 import unittest
+import pep8
 from models.place import Place
 from datetime import datetime
 
 
 class TestPlace(unittest.TestCase):
     """Tests for the Place class"""
+
+    def test_pep8_compliance(self):
+        """ Test PEP8 compliance using pycodestyle"""
+        pycodestyle = pep8.StyleGuide(quiet=True)
+        file_paths = ["models/user.py"]
+        result = pycodestyle.check_files(file_paths)
+        error_message = "Found code style errors (and warnings)."
+        self.assertEqual(result.total_errors, 0, error_message)
 
     cls = Place()
 
@@ -54,6 +63,32 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.cls.id, str)
         self.assertIsInstance(self.cls.created_at, datetime.datetime)
         self.assertIsInstance(self.cls.updated_at, datetime.datetime)
+
+    def test_instance_init_none(self):
+        """Testing none"""
+        instance = Place()
+        instance.city_id = None
+        instance.user_id = None
+        instance.name = None
+        instance.description = None
+        instance.number_rooms = None
+        instance.number_bathrooms = None
+        instance.max_guest = None
+        instance.price_by_night = None
+        instance.latitude = None
+        instance.longitude = None
+        instance.amenity_ids = None
+        self.assertEqual(instance.city_id, None)
+        self.assertEqual(instance.user_id, None)
+        self.assertEqual(instance.name, None)
+        self.assertEqual(instance.description, None)
+        self.assertEqual(instance.number_rooms, None)
+        self.assertEqual(instance.number_bathrooms, None)
+        self.assertEqual(instance.max_guest, None)
+        self.assertEqual(instance.price_by_night, None)
+        self.assertEqual(instance.latitude, None)
+        self.assertEqual(instance.longitude, None)
+        self.assertEqual(instance.amenity_ids, None)
 
 
 if __name__ == '__main__':

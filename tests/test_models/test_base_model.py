@@ -3,6 +3,7 @@
 This module tests the base class
 """
 import unittest
+import pep8
 from models.base_model import BaseModel
 from datetime import datetime
 from datetime import datetime, timedelta
@@ -10,6 +11,14 @@ from datetime import datetime, timedelta
 
 class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class"""
+
+    def test_pep8_compliance(self):
+        """ Test PEP8 compliance using pycodestyle"""
+        pycodestyle = pep8.StyleGuide(quiet=True)
+        file_paths = ["models/user.py"]
+        result = pycodestyle.check_files(file_paths)
+        error_message = "Found code style errors (and warnings)."
+        self.assertEqual(result.total_errors, 0, error_message)
 
     def test_init(self):
         """Test if id, created_at, and updated_at exists and their types.

@@ -4,12 +4,21 @@ Unit tests for <file>
 Run with: python -m unittest test_module
 """
 import unittest
+import pep8
 from models.amenity import Amenity
 from datetime import datetime
 
 
 class TestAmenity(unittest.TestCase):
     """Tests for the Amenity class"""
+
+    def test_pep8_compliance(self):
+        """ Test PEP8 compliance using pycodestyle"""
+        pycodestyle = pep8.StyleGuide(quiet=True)
+        file_paths = ["models/user.py"]
+        result = pycodestyle.check_files(file_paths)
+        error_message = "Found code style errors (and warnings)."
+        self.assertEqual(result.total_errors, 0, error_message)
 
     cls = Amenity()
 
@@ -35,6 +44,12 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(self.cls.id, str)
         self.assertIsInstance(self.cls.created_at, datetime.datetime)
         self.assertIsInstance(self.cls.updated_at, datetime.datetime)
+
+    def test_instance_init_none(self):
+        """Testing none"""
+        instance = Amenity()
+        instance.name = None
+        self.assertEqual(instance.name, None)
 
 
 if __name__ == '__main__':
