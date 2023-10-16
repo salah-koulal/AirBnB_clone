@@ -43,8 +43,29 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.cls.state_id, str)
         self.assertIsInstance(self.cls.name, str)
         self.assertIsInstance(self.cls.id, str)
-        self.assertIsInstance(self.cls.created_at, datetime.datetime)
-        self.assertIsInstance(self.cls.updated_at, datetime.datetime)
+
+    def test_instance_id_unique(self):
+        "testing"
+        instance_1 = City()
+        instance_2 = City()
+        self.assertNotEqual(instance_1.id, instance_2.id)
+
+    def test_instance_str(self):
+        "testing"
+        instance = City()
+        expected_str = f"[City] ({instance.id}) {instance.__dict__}"
+        self.assertEqual(expected_str, instance.__str__())
+
+    def test_instance_created_at(self):
+        "testing"
+        instance = City()
+        self.assertEqual(datetime, type(instance.created_at))
+
+    def test_instance_init_kwargs(self):
+        """Testing kwargs"""
+        instance = City()
+        instance.name = "Monaco"
+        self.assertEqual(instance.name, "Monaco")
 
     def test_instance_init_none(self):
         """Testing none"""

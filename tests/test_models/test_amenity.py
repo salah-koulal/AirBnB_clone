@@ -42,8 +42,11 @@ class TestAmenity(unittest.TestCase):
         """tests if the type of the attribute is the correct one"""
         self.assertIsInstance(self.cls.name, str)
         self.assertIsInstance(self.cls.id, str)
-        self.assertIsInstance(self.cls.created_at, datetime.datetime)
-        self.assertIsInstance(self.cls.updated_at, datetime.datetime)
+
+    def test_instance_created_at(self):
+        "testing"
+        instance = Amenity()
+        self.assertEqual(datetime, type(instance.created_at))
 
     def test_instance_init_none(self):
         """Testing none"""

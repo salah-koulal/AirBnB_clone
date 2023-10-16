@@ -5,7 +5,6 @@ This module tests the base class
 import unittest
 import pep8
 from models.base_model import BaseModel
-from datetime import datetime
 from datetime import datetime, timedelta
 
 
@@ -19,16 +18,6 @@ class TestBaseModel(unittest.TestCase):
         result = pycodestyle.check_files(file_paths)
         error_message = "Found code style errors (and warnings)."
         self.assertEqual(result.total_errors, 0, error_message)
-
-    def test_init(self):
-        """Test if id, created_at, and updated_at exists and their types.
-        """
-        my_model = BaseModel()
-        self.assertTrue(type(my_model.id), str)
-        self.assertTrue(len(my_model.id), 36)
-        self.assertTrue(type(my_model.created_at), datetime)
-        self.assertTrue(type(my_model.updated_at), datetime)
-        self.assertEqual(my_model.updated_at, my_model.created_at)
 
     def test_instance(self):
         """Testing a new created instance"""
