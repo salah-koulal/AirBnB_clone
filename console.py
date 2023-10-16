@@ -12,8 +12,7 @@ an empty line + ENTER shouldn’t execute anything.
 Your code should not be executed when imported
 """
 import cmd
-import sys
-import shlex
+import re
 from models import storage
 
 
@@ -153,23 +152,26 @@ class HBNBCommand(cmd.Cmd):
                     count += 1
             print(count)
 
-    def do_User(self, arg):
-        """Handle actions for the State class"""
-        self.default("User", arg)
-
-    def default(self, cls_name, arg):
-        """Helper method to handle actions for specific classes"""
-        args = arg.split('.')
-        command = cls_name + arg
-
-        if len(args) == 2 and args[1] == "all()":
-            if cls_name in storage.classes():
-                self.do_all(cls_name)
-        elif len(args) == 2 and args[1] == "count()":
-            if cls_name in storage.classes():
-                self.do_count(cls_name)
-        else:
-            super().default(command)
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        args_dict = {
+            "all": self.do_all,
+            "count": self.do_count,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            args = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", args[1])
+            if match is not None:
+                command = [args[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in args_dict.keys():
+                    call = "{} {}".format(args[0], command[1])
+                    return args_dict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
 
 
 if __name__ == '__main__':
