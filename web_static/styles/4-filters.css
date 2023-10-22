@@ -2,12 +2,12 @@
             FILTERS
 --------------------------------------*/
 .filters{
-    color: white;
+    background-color: white;
     height: 70px;
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    justify-content: center;
+    align-items: center;
 }
 
 /* -------------------------------------
@@ -20,6 +20,7 @@
     height: 48px;
     width: 20%;
     float: right;
+    cursor: pointer;
     border-radius: 4px;
     justify-content: center;
     margin-top: 10px;
